@@ -6,9 +6,11 @@
 package com.appconsultas.EJB;
 
 import com.appconsultas.model.Usuario;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -29,4 +31,23 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
         super(Usuario.class);
     }
     
+    @Override
+    public Usuario iniciarSesion(Usuario us) {
+        Usuario usuario = null;
+        try {
+            String consulta = "FROM Usuario u WHERE u.usuario = ?1 and u.clave=?2";
+            Query q = em.createQuery(consulta);
+            q.setParameter(1, us.getUsuario());
+            q.setParameter(2, us.getClave());
+            
+            List<Usuario> lista = q.getResultList();
+            if (!lista.isEmpty()) {
+                usuario = lista.get(0);
+            }
+        } catch (Exception e) {
+            throw e;
+        } 
+        
+        return usuario;
+    }
 }
