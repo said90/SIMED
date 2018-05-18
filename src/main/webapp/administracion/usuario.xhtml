@@ -13,77 +13,77 @@
 
 
             <ui:define name="content">
-                <br/>
-                <p:panel header="Registros de creacion de usuarios"  style="width: 100%;margin: 0 auto; text-align:center;
-                         padding: 5px; text-align: justify;font-size: 14px">
-                    <h:form >
+                        <br/>
+                        <p:panel header="Registros de creacion de usuarios"  style="width: 100%;margin: 0 auto; text-align:center;
+                                 padding: 5px; text-align: justify;font-size: 14px">
+                            <h:form >
 
-                        <p:growl id="mensaje" autoUpdate="false" severity="info, fatal" showSummary="false" showDetail="true"/>
-
-
-
-
-                        <p:fieldset legend="Datos Personales del Usuario">
-                            <p:panelGrid columns="3" layout="grid" style="width: 75%;margin: 0 auto" id="pgDatos">
-                                <p:outputLabel for="txtNombres" value="Nombres"/>
-                                <p:inputText  required="true"  id="txtNombres" value="#{usuarioController.persona.nombres}"/>
-                                <p:message for="txtNombres"/>
-
-                                <p:outputLabel for="txtApellidos"  value="Apellidos"/>
-                                <p:inputText  required="true"  id="txtApellidos" value="#{usuarioController.persona.apellidos}"/>
-                                <p:message for="txtApellidos"/>
-
-                                <p:outputLabel for="rbdSexo"  value="Sexo"/>
-                                <p:selectOneRadio  required="true"  id="rbdSexo" value="#{usuarioController.persona.sexo}" >
-                                    <f:selectItem itemLabel="Masculino" itemValue="Masculino" />
-                                    <f:selectItem itemLabel="Femenino" itemValue="Femenino" />
-                                </p:selectOneRadio>
-                                <p:message for="rbdSexo" />
-
-                                <p:outputLabel for="txtFecha" value="Fecha de Nacimiento" />
-                                <p:calendar  required="true"  id="txtFecha" value="#{usuarioController.persona.fechaDeNacimiento}"  locale="es" navigator="true" showTodayButton="true"/>
-                                <p:message for="txtFecha" />
-                            </p:panelGrid>
-                        </p:fieldset>
+                                <p:growl id="mensaje" autoUpdate="false" severity="info, fatal" showSummary="false" showDetail="true"/>
 
 
 
-                        <p:fieldset legend="Credenciales de usuario" style="margin: 0 auto" >
 
-                            <p:panelGrid columns="3" layout="grid" style="width: 75%;margin: 0 auto " id="pgUsuario">
-                                <p:outputLabel for="cboTipo" value="Tipo de Usuario"/>
-                                <p:selectOneMenu id="cboTipo" value="#{usuarioController.usuario.idTipoUsuario}">
-                                    <f:selectItem itemLabel="-- Seleccione --" noSelectionOption="true"/>
-                                    <f:selectItem itemLabel="Operario" itemValue="Operario"/>
-                                    <f:selectItem itemLabel="Administrador" itemValue="Administrador"/>
-                                </p:selectOneMenu>
-                                <p:message for="cboTipo"/>
+                                <p:fieldset legend="Datos Personales del Usuario">
+                                    <p:panelGrid columns="3" layout="grid" style="width: 75%;margin: 0 auto" id="pgDatos">
+                                        <p:outputLabel for="txtNombres" value="Nombres"/>
+                                        <p:inputText  required="true"  id="txtNombres" value="#{usuarioController.persona.nombres}"/>
+                                        <p:message for="txtNombres"/>
 
-                                <p:outputLabel for="txtUsuario" value="Usuario"/>
-                                <p:inputText id="txtUsuario" required="true" value="#{usuarioController.usuario.usuario}"/>
-                                <p:message for="txtUsuario"/>
+                                        <p:outputLabel for="txtApellidos"  value="Apellidos"/>
+                                        <p:inputText  required="true"  id="txtApellidos" value="#{usuarioController.persona.apellidos}"/>
+                                        <p:message for="txtApellidos"/>
 
-                                <p:outputLabel for="clave1" value="Clave"/>
-                                <p:password id="clave1" value="#{usuarioController.usuario.clave}" match="clave2" 
-                                            validatorMessage="Las claves no coinciden" goodLabel="Buena" strongLabel="Fuerte" weakLabel="Debil"
-                                            required="true"  feedback="true" promptLabel="Ingrese un clave"/>
-                                <p:message for="clave1"/>
+                                        <p:outputLabel for="rbdSexo"  value="Sexo"/>
+                                        <p:selectOneRadio  required="true"  id="rbdSexo" value="#{usuarioController.persona.sexo}" >
+                                            <f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+                                            <f:selectItem itemLabel="Femenino" itemValue="Femenino" />
+                                        </p:selectOneRadio>
+                                        <p:message for="rbdSexo" />
 
-                                <p:outputLabel for="clave2" value="Repetir Clave"/>
-                                <p:password id="clave2" validatorMessage="Las claves no coinciden" goodLabel="Buena" strongLabel="Fuerte" weakLabel="Debil"
-                                            required="true"  feedback="true" promptLabel="Repita la clave"/>
-                                <p:message for="clave2" />
-                                <h:column/>
-                                <p:commandButton actionListener="#{usuarioController.registarUsuario()}"  action="/usuario.xhtml?faces-redirect=true"
-                                                 value="Registrar" icon="ui-icon-check" update="pgDatos,pgUsuario,mensaje" style="margin: 0 auto" >
+                                        <p:outputLabel for="txtFecha" value="Fecha de Nacimiento" />
+                                        <p:calendar  required="true"  id="txtFecha" value="#{usuarioController.persona.fechaDeNacimiento}"  locale="es" navigator="true" showTodayButton="true"/>
+                                        <p:message for="txtFecha" />
+                                    </p:panelGrid>
+                                </p:fieldset>
 
-                                </p:commandButton>
 
-                            </p:panelGrid>
 
-                        </p:fieldset>
+                                <p:fieldset legend="Credenciales de usuario" style="margin: 0 auto" >
 
-                    </h:form>
+                                    <p:panelGrid columns="3" layout="grid" style="width: 75%;margin: 0 auto " id="pgUsuario">
+                                        <p:outputLabel for="cboTipo" value="Tipo de Usuario"/>
+                                        <p:selectOneMenu id="cboTipo" value="#{usuarioController.usuario.idTipoUsuario}">
+                                            <f:selectItem itemLabel="-- Seleccione --" noSelectionOption="true"/>
+                                            <f:selectItem itemLabel="Operario" itemValue="Operario"/>
+                                            <f:selectItem itemLabel="Administrador" itemValue="Administrador"/>
+                                        </p:selectOneMenu>
+                                        <p:message for="cboTipo"/>
+
+                                        <p:outputLabel for="txtUsuario" value="Usuario"/>
+                                        <p:inputText id="txtUsuario" required="true" value="#{usuarioController.usuario.usuario}"/>
+                                        <p:message for="txtUsuario"/>
+
+                                        <p:outputLabel for="clave1" value="Clave"/>
+                                        <p:password id="clave1" value="#{usuarioController.usuario.clave}" match="clave2" 
+                                                    validatorMessage="Las claves no coinciden" goodLabel="Buena" strongLabel="Fuerte" weakLabel="Debil"
+                                                    required="true"  feedback="true" promptLabel="Ingrese un clave"/>
+                                        <p:message for="clave1"/>
+
+                                        <p:outputLabel for="clave2" value="Repetir Clave"/>
+                                        <p:password id="clave2" validatorMessage="Las claves no coinciden" goodLabel="Buena" strongLabel="Fuerte" weakLabel="Debil"
+                                                    required="true"  feedback="true" promptLabel="Repita la clave"/>
+                                        <p:message for="clave2" />
+                                        <h:column/>
+                                        <p:commandButton actionListener="#{usuarioController.registarUsuario()}"  action="/usuario.xhtml?faces-redirect=true"
+                                                         value="Registrar" icon="ui-icon-check" update="pgDatos,pgUsuario,mensaje" style="margin: 0 auto" >
+
+                                        </p:commandButton>
+
+                                    </p:panelGrid>
+
+                                </p:fieldset>
+
+                            </h:form>
                     <p:separator/>
 
                     <p:dataTable id="tblUsuarios" value="#{usuarioController.usuarios}" var="usuario"  
