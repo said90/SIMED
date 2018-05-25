@@ -7,6 +7,7 @@ package com.appconsultas.model;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,23 +17,19 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author bfranco
+ * @author bsf_o
  */
 @Entity
 @Table(name = "usuario")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
     , @NamedQuery(name = "Usuario.findByIdUsuario", query = "SELECT u FROM Usuario u WHERE u.idUsuario = :idUsuario")
-    , @NamedQuery(name = "Usuario.findByNombre", query = "SELECT u FROM Usuario u WHERE u.nombre = :nombre")
-    , @NamedQuery(name = "Usuario.findByApellidos", query = "SELECT u FROM Usuario u WHERE u.apellidos = :apellidos")
-    , @NamedQuery(name = "Usuario.findBySexo", query = "SELECT u FROM Usuario u WHERE u.sexo = :sexo")
     , @NamedQuery(name = "Usuario.findByUsuario", query = "SELECT u FROM Usuario u WHERE u.usuario = :usuario")
     , @NamedQuery(name = "Usuario.findByClave", query = "SELECT u FROM Usuario u WHERE u.clave = :clave")
     , @NamedQuery(name = "Usuario.findByEstado", query = "SELECT u FROM Usuario u WHERE u.estado = :estado")})
@@ -44,15 +41,6 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_usuario")
     private Integer idUsuario;
-    @Size(max = 45)
-    @Column(name = "nombre")
-    private String nombre;
-    @Size(max = 45)
-    @Column(name = "apellidos")
-    private String apellidos;
-    @Size(max = 15)
-    @Column(name = "sexo")
-    private String sexo;
     @Size(max = 16)
     @Column(name = "usuario")
     private String usuario;
@@ -61,8 +49,8 @@ public class Usuario implements Serializable {
     private String clave;
     @Column(name = "estado")
     private Short estado;
-    @JoinColumn(name = "id_persona", referencedColumnName = "id_persona")
-    @ManyToOne(optional = false)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_persona", nullable = false)
     private Persona idPersona;
     @JoinColumn(name = "id_tipo_usuario", referencedColumnName = "id_tipo_usuario")
     @ManyToOne(optional = false)
@@ -83,29 +71,7 @@ public class Usuario implements Serializable {
         this.idUsuario = idUsuario;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getApellidos() {
-        return apellidos;
-    }
-
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
-    }
-
-    public String getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
-    }
 
     public String getUsuario() {
         return usuario;
@@ -171,5 +137,5 @@ public class Usuario implements Serializable {
     public String toString() {
         return "com.appconsultas.model.Usuario[ idUsuario=" + idUsuario + " ]";
     }
-    
+
 }

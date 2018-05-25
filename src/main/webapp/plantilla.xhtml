@@ -19,13 +19,13 @@
                 <h:form>
                     <p:panel  style="width: 100%;margin: 0 auto; text-align:center;
                               padding: 5px; text-align: justify;font-size: 14px">
-                        <p:menubar model="#{menuController.model}">
+                        <p:menubar model="#{loginController.model}">
 
                             <f:facet name="options">
                                 <p:outputLabel value="Bienvenido #{usuarioController.usuario.usuario}"/>
                                 <p:outputLabel value="      | "/>
 
-                                <p:commandButton icon="ui-icon-power" value="Cerrar Sesion" actionListener="#{menuController.cerrarSesion()}" action="/login.xhtml?faces-redirect=true"/>
+                                <p:commandButton icon="ui-icon-power" value="Cerrar Sesion" actionListener="#{loginController.cerrarSesion()}" action="/login.xhtml?faces-redirect=true"/>
 
                             </f:facet>
 

@@ -18,15 +18,13 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author bfranco
+ * @author bsf_o
  */
 @Entity
 @Table(name = "item")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Item.findAll", query = "SELECT i FROM Item i")
     , @NamedQuery(name = "Item.findByIditemMenu", query = "SELECT i FROM Item i WHERE i.iditemMenu = :iditemMenu")
@@ -41,7 +39,7 @@ public class Item implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_itemMenu")
     private Integer iditemMenu;
-    @Size(max = 45)
+    @Size(max = 255)
     @Column(name = "nombre")
     private String nombre;
     @Size(max = 255)

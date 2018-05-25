@@ -20,6 +20,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 /**
@@ -27,7 +28,7 @@ import javax.inject.Named;
  * @author bsf_o
  */
 @Named
-@SessionScoped
+@ViewScoped
 public class UsuarioController implements Serializable {
 
     private Usuario usuario;
@@ -58,9 +59,7 @@ public class UsuarioController implements Serializable {
 
     public void registarUsuario() {
         try {
-            this.usuario.setIdPersona(persona);
-            this.persona.setIdTipoPersona(tipoPersona);
-            this.usuario.setIdTipoUsuario(tipoUsuario);
+            usuario.setIdPersona(persona);
             usuarioEJB.create(usuario);
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Se registro exitosamente"));
@@ -82,7 +81,7 @@ public class UsuarioController implements Serializable {
         }
     }
 
-    public void eliminarCargo() {
+    public void eliminarUsuario() {
         try {
             usuarioEJB.remove(usuario);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "Usuario Eliminado con éxito"));
@@ -94,6 +93,8 @@ public class UsuarioController implements Serializable {
         }
     }
 
+    
+
     public String iniciarSesion() {
         String redireccion = null;
 
@@ -102,6 +103,7 @@ public class UsuarioController implements Serializable {
             us = usuarioEJB.iniciarSesion(usuario);
 
             if (us != null) {
+
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", us);
                 redireccion = "/plantilla.xhtml?faces-redirect=true";
 
@@ -186,7 +188,5 @@ public class UsuarioController implements Serializable {
     public void setTiposPersona(List<Tipopersona> tiposPersona) {
         this.tiposPersona = tiposPersona;
     }
-    
-    
 
 }

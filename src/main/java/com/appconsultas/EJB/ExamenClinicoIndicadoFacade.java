@@ -12,7 +12,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author bfranco
+ * @author bsf_o
  */
 @Stateless
 public class ExamenClinicoIndicadoFacade extends AbstractFacade<ExamenClinicoIndicado> implements ExamenClinicoIndicadoFacadeLocal {

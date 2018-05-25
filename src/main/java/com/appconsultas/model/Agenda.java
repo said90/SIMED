@@ -23,16 +23,13 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author bfranco
+ * @author bsf_o
  */
 @Entity
 @Table(name = "agenda")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Agenda.findAll", query = "SELECT a FROM Agenda a")
     , @NamedQuery(name = "Agenda.findByIdAgenda", query = "SELECT a FROM Agenda a WHERE a.idAgenda = :idAgenda")
@@ -109,7 +106,6 @@ public class Agenda implements Serializable {
         this.idPersona = idPersona;
     }
 
-    @XmlTransient
     public List<Episodio> getEpisodioList() {
         return episodioList;
     }

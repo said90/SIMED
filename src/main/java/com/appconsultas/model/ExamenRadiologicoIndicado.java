@@ -9,23 +9,22 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author bfranco
+ * @author bsf_o
  */
 @Entity
 @Table(name = "examen_radiologico_indicado")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "ExamenRadiologicoIndicado.findAll", query = "SELECT e FROM ExamenRadiologicoIndicado e")
     , @NamedQuery(name = "ExamenRadiologicoIndicado.findByIdExamenRadiologicoIndicados", query = "SELECT e FROM ExamenRadiologicoIndicado e WHERE e.idExamenRadiologicoIndicados = :idExamenRadiologicoIndicados")
@@ -34,11 +33,11 @@ public class ExamenRadiologicoIndicado implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id_examen_radiologico_indicados")
     private Integer idExamenRadiologicoIndicados;
-    @Size(max = 255)
+    @Size(max = 45)
     @Column(name = "resultado")
     private String resultado;
     @JoinColumn(name = "id_episodio", referencedColumnName = "id_episodio")

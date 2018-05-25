@@ -11,7 +11,7 @@ import javax.ejb.Local;
 
 /**
  *
- * @author bfranco
+ * @author bsf_o
  */
 @Local
 public interface TelefonoFacadeLocal {

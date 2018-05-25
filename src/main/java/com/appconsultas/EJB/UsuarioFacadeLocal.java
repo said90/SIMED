@@ -11,7 +11,7 @@ import javax.ejb.Local;
 
 /**
  *
- * @author bfranco
+ * @author bsf_o
  */
 @Local
 public interface UsuarioFacadeLocal {
@@ -29,7 +29,7 @@ public interface UsuarioFacadeLocal {
     List<Usuario> findRange(int[] range);
 
     int count();
-
-    Usuario iniciarSesion(Usuario us);
-
+    
+     Usuario iniciarSesion(Usuario us);
+    
 }

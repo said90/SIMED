@@ -9,23 +9,22 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author bfranco
+ * @author bsf_o
  */
 @Entity
 @Table(name = "diagnostico_encontrado")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "DiagnosticoEncontrado.findAll", query = "SELECT d FROM DiagnosticoEncontrado d")
     , @NamedQuery(name = "DiagnosticoEncontrado.findByIdDiagnosticoEncontrado", query = "SELECT d FROM DiagnosticoEncontrado d WHERE d.idDiagnosticoEncontrado = :idDiagnosticoEncontrado")
@@ -34,8 +33,8 @@ public class DiagnosticoEncontrado implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id_diagnostico_encontrado")
     private Integer idDiagnosticoEncontrado;
     @Size(max = 45)

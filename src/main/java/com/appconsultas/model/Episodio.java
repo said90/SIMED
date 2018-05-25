@@ -24,16 +24,13 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author bfranco
+ * @author bsf_o
  */
 @Entity
 @Table(name = "episodio")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Episodio.findAll", query = "SELECT e FROM Episodio e")
     , @NamedQuery(name = "Episodio.findByIdEpisodio", query = "SELECT e FROM Episodio e WHERE e.idEpisodio = :idEpisodio")
@@ -248,7 +245,6 @@ public class Episodio implements Serializable {
         this.numeroReferencias = numeroReferencias;
     }
 
-    @XmlTransient
     public List<MedicamentosIndicados> getMedicamentosIndicadosList() {
         return medicamentosIndicadosList;
     }
@@ -257,7 +253,6 @@ public class Episodio implements Serializable {
         this.medicamentosIndicadosList = medicamentosIndicadosList;
     }
 
-    @XmlTransient
     public List<DiagnosticoEncontrado> getDiagnosticoEncontradoList() {
         return diagnosticoEncontradoList;
     }
@@ -282,7 +277,6 @@ public class Episodio implements Serializable {
         this.idAgenda = idAgenda;
     }
 
-    @XmlTransient
     public List<ExamenRadiologicoIndicado> getExamenRadiologicoIndicadoList() {
         return examenRadiologicoIndicadoList;
     }
@@ -291,7 +285,6 @@ public class Episodio implements Serializable {
         this.examenRadiologicoIndicadoList = examenRadiologicoIndicadoList;
     }
 
-    @XmlTransient
     public List<ExamenClinicoIndicado> getExamenClinicoIndicadoList() {
         return examenClinicoIndicadoList;
     }
@@ -300,7 +293,6 @@ public class Episodio implements Serializable {
         this.examenClinicoIndicadoList = examenClinicoIndicadoList;
     }
 
-    @XmlTransient
     public List<Referencia> getReferenciaList() {
         return referenciaList;
     }

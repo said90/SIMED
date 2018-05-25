@@ -24,16 +24,13 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author bfranco
+ * @author bsf_o
  */
 @Entity
 @Table(name = "persona")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Persona.findAll", query = "SELECT p FROM Persona p")
     , @NamedQuery(name = "Persona.findByIdPersona", query = "SELECT p FROM Persona p WHERE p.idPersona = :idPersona")
@@ -55,22 +52,22 @@ public class Persona implements Serializable {
     @Size(max = 10)
     @Column(name = "dui")
     private String dui;
-    @Size(max = 60)
+    @Size(max = 255)
     @Column(name = "nombres")
     private String nombres;
-    @Size(max = 60)
+    @Size(max = 255)
     @Column(name = "apellidos")
     private String apellidos;
-    @Size(max = 10)
+    @Size(max = 255)
     @Column(name = "sexo")
     private String sexo;
     @Column(name = "fecha_de_nacimiento")
     @Temporal(TemporalType.DATE)
     private Date fechaDeNacimiento;
-    @Size(max = 10)
+    @Size(max = 25)
     @Column(name = "estado_civil")
     private String estadoCivil;
-    @Size(max = 255)
+    @Size(max = 45)
     @Column(name = "direccion")
     private String direccion;
     @JoinColumn(name = "idTipoPersona", referencedColumnName = "idTipoPersona")
@@ -78,8 +75,6 @@ public class Persona implements Serializable {
     private Tipopersona idTipoPersona;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersona")
     private List<Agenda> agendaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersona")
-    private List<Usuario> usuarioList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersona")
     private List<Telefono> telefonoList;
 
@@ -162,7 +157,6 @@ public class Persona implements Serializable {
         this.idTipoPersona = idTipoPersona;
     }
 
-    @XmlTransient
     public List<Agenda> getAgendaList() {
         return agendaList;
     }
@@ -171,16 +165,7 @@ public class Persona implements Serializable {
         this.agendaList = agendaList;
     }
 
-    @XmlTransient
-    public List<Usuario> getUsuarioList() {
-        return usuarioList;
-    }
 
-    public void setUsuarioList(List<Usuario> usuarioList) {
-        this.usuarioList = usuarioList;
-    }
-
-    @XmlTransient
     public List<Telefono> getTelefonoList() {
         return telefonoList;
     }
