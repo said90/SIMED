@@ -30,7 +30,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
     public UsuarioFacade() {
         super(Usuario.class);
     }
-    
+
     @Override
     public Usuario iniciarSesion(Usuario us) {
         Usuario usuario = null;
@@ -39,16 +39,15 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
             Query q = em.createQuery(consulta);
             q.setParameter(1, us.getUsuario());
             q.setParameter(2, us.getClave());
-            
+
             List<Usuario> lista = q.getResultList();
             if (!lista.isEmpty()) {
                 usuario = lista.get(0);
             }
         } catch (Exception e) {
             throw e;
-        } 
-        
+        }
+
         return usuario;
     }
-    
 }

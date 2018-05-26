@@ -44,8 +44,6 @@ public class TipoUsuario implements Serializable {
     @Size(max = 45)
     @Column(name = "tipo_usuario")
     private String tipoUsuario;
-    @OneToMany(mappedBy = "idTipoUsuario")
-    private List<Item> itemList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTipoUsuario")
     private List<Menu> menuList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTipoUsuario")
@@ -72,15 +70,6 @@ public class TipoUsuario implements Serializable {
 
     public void setTipoUsuario(String tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
-    }
-
-    @XmlTransient
-    public List<Item> getItemList() {
-        return itemList;
-    }
-
-    public void setItemList(List<Item> itemList) {
-        this.itemList = itemList;
     }
 
     @XmlTransient

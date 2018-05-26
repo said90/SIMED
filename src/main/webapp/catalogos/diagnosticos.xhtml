@@ -22,10 +22,10 @@
                                      var="diagnostico" style="width: 80%;margin: 0 auto; text-align:center;
                                      padding: 5px; text-align: justify;font-size: 14px"
                                      emptyMessage="No hay registros en la base de datos"
-                                     paginator="true" rows="5" paginatorPosition="bottom"
+                                     paginator="true" rows="15" paginatorPosition="bottom"
                                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
                                      {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                     rowsPerPageTemplate="5,10,15" reflow="true" resizeMode="expand"  widgetVar="data" >
+                                     rowsPerPageTemplate="5,10,15,25,50" reflow="true" resizeMode="expand"  widgetVar="data" >
 
 
                             <f:facet name="header" >
@@ -44,7 +44,7 @@
 
                             </f:facet>
 
-                            <p:column headerText="Diagnostico" style="width: 50%; text-align:  center">
+                            <p:column headerText="Diagnostico" style="width: 50%; text-align:  center" >
                                 <p:outputLabel value="#{diagnostico.descripcion}"/>
                             </p:column>
                             <p:column headerText="Operaciones" style=" width: 25%;text-align: center; padding-right: 10px">

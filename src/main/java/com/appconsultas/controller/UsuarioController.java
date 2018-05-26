@@ -7,11 +7,9 @@ package com.appconsultas.controller;
 
 import com.appconsultas.EJB.PersonaFacadeLocal;
 import com.appconsultas.EJB.TipoUsuarioFacadeLocal;
-import com.appconsultas.EJB.TipopersonaFacadeLocal;
 import com.appconsultas.EJB.UsuarioFacadeLocal;
 import com.appconsultas.model.Persona;
 import com.appconsultas.model.TipoUsuario;
-import com.appconsultas.model.Tipopersona;
 import com.appconsultas.model.Usuario;
 import java.io.Serializable;
 import java.util.List;
@@ -33,11 +31,9 @@ public class UsuarioController implements Serializable {
 
     private Usuario usuario;
     private Persona persona;
-    private Tipopersona tipoPersona;
     private TipoUsuario tipoUsuario;
     private List<Usuario> usuarios;
     private List<TipoUsuario> tiposUsuarios;
-    private List<Tipopersona> tiposPersona;
 
     @EJB
     private UsuarioFacadeLocal usuarioEJB;
@@ -46,7 +42,6 @@ public class UsuarioController implements Serializable {
     @EJB
     private TipoUsuarioFacadeLocal tipoUsuarioEJB;
     @EJB
-    private TipopersonaFacadeLocal tipoPersonaEJB;
 
     @PostConstruct
     public void init() {
@@ -54,7 +49,6 @@ public class UsuarioController implements Serializable {
         persona = new Persona();
         usuarios = usuarioEJB.findAll();
         tiposUsuarios = tipoUsuarioEJB.findAll();
-        tiposPersona = tipoPersonaEJB.findAll();
     }
 
     public void registarUsuario() {
@@ -165,13 +159,7 @@ public class UsuarioController implements Serializable {
         this.tipoUsuario = tipoUsuario;
     }
 
-    public Tipopersona getTipoPersona() {
-        return tipoPersona;
-    }
 
-    public void setTipoPersona(Tipopersona tipoPersona) {
-        this.tipoPersona = tipoPersona;
-    }
 
     public List<TipoUsuario> getTiposUsuarios() {
         return tiposUsuarios;
@@ -181,12 +169,5 @@ public class UsuarioController implements Serializable {
         this.tiposUsuarios = tiposUsuarios;
     }
 
-    public List<Tipopersona> getTiposPersona() {
-        return tiposPersona;
-    }
-
-    public void setTiposPersona(List<Tipopersona> tiposPersona) {
-        this.tiposPersona = tiposPersona;
-    }
 
 }

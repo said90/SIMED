@@ -57,14 +57,14 @@ public class Agenda implements Serializable {
     @Size(max = 45)
     @Column(name = "estado")
     private String estado;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAgenda")
-    private List<Episodio> episodioList;
     @JoinColumn(name = "id_medico", referencedColumnName = "id_medico")
     @ManyToOne(optional = false)
     private Medico idMedico;
     @JoinColumn(name = "id_paciente", referencedColumnName = "id_paciente")
     @ManyToOne(optional = false)
     private Paciente idPaciente;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAgenda")
+    private List<Episodio> episodioList;
 
     public Agenda() {
     }
@@ -105,15 +105,6 @@ public class Agenda implements Serializable {
         this.estado = estado;
     }
 
-    @XmlTransient
-    public List<Episodio> getEpisodioList() {
-        return episodioList;
-    }
-
-    public void setEpisodioList(List<Episodio> episodioList) {
-        this.episodioList = episodioList;
-    }
-
     public Medico getIdMedico() {
         return idMedico;
     }
@@ -128,6 +119,15 @@ public class Agenda implements Serializable {
 
     public void setIdPaciente(Paciente idPaciente) {
         this.idPaciente = idPaciente;
+    }
+
+    @XmlTransient
+    public List<Episodio> getEpisodioList() {
+        return episodioList;
+    }
+
+    public void setEpisodioList(List<Episodio> episodioList) {
+        this.episodioList = episodioList;
     }
 
     @Override

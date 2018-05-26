@@ -49,7 +49,7 @@ public class Medico implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMedico")
     private List<Agenda> agendaList;
     @JoinColumn(name = "id_persona", referencedColumnName = "id_persona")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
     private Persona idPersona;
 
     public Medico() {

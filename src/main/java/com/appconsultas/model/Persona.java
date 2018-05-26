@@ -77,8 +77,6 @@ public class Persona implements Serializable {
     private String telefono;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersona")
     private List<Paciente> pacienteList;
-    @OneToMany(mappedBy = "idPersona")
-    private List<Telefono> telefonoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersona")
     private List<Medico> medicoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersona")
@@ -170,15 +168,6 @@ public class Persona implements Serializable {
 
     public void setPacienteList(List<Paciente> pacienteList) {
         this.pacienteList = pacienteList;
-    }
-
-    @XmlTransient
-    public List<Telefono> getTelefonoList() {
-        return telefonoList;
-    }
-
-    public void setTelefonoList(List<Telefono> telefonoList) {
-        this.telefonoList = telefonoList;
     }
 
     @XmlTransient

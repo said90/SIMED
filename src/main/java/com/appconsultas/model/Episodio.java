@@ -126,18 +126,18 @@ public class Episodio implements Serializable {
     @Column(name = "antecedentes")
     private String antecedentes;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEpisodio")
+    private List<Incapacidad> incapacidadList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEpisodio")
+    private List<MedicamentosIndicados> medicamentosIndicadosList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEpisodio")
     private List<DiagnosticoEncontrado> diagnosticoEncontradoList;
     @JoinColumn(name = "id_agenda", referencedColumnName = "id_agenda")
     @ManyToOne(optional = false)
     private Agenda idAgenda;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEpisodio")
-    private List<ExamenClinicoIndicado> examenClinicoIndicadoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEpisodio")
-    private List<Incapacidad> incapacidadList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEpisodio")
-    private List<MedicamentosIndicados> medicamentosIndicadosList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEpisodio")
     private List<ExamenRadiologicoIndicado> examenRadiologicoIndicadoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEpisodio")
+    private List<ExamenClinicoIndicado> examenClinicoIndicadoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEpisodio")
     private List<Referencia> referenciaList;
 
@@ -341,32 +341,6 @@ public class Episodio implements Serializable {
     }
 
     @XmlTransient
-    public List<DiagnosticoEncontrado> getDiagnosticoEncontradoList() {
-        return diagnosticoEncontradoList;
-    }
-
-    public void setDiagnosticoEncontradoList(List<DiagnosticoEncontrado> diagnosticoEncontradoList) {
-        this.diagnosticoEncontradoList = diagnosticoEncontradoList;
-    }
-
-    public Agenda getIdAgenda() {
-        return idAgenda;
-    }
-
-    public void setIdAgenda(Agenda idAgenda) {
-        this.idAgenda = idAgenda;
-    }
-
-    @XmlTransient
-    public List<ExamenClinicoIndicado> getExamenClinicoIndicadoList() {
-        return examenClinicoIndicadoList;
-    }
-
-    public void setExamenClinicoIndicadoList(List<ExamenClinicoIndicado> examenClinicoIndicadoList) {
-        this.examenClinicoIndicadoList = examenClinicoIndicadoList;
-    }
-
-    @XmlTransient
     public List<Incapacidad> getIncapacidadList() {
         return incapacidadList;
     }
@@ -385,12 +359,38 @@ public class Episodio implements Serializable {
     }
 
     @XmlTransient
+    public List<DiagnosticoEncontrado> getDiagnosticoEncontradoList() {
+        return diagnosticoEncontradoList;
+    }
+
+    public void setDiagnosticoEncontradoList(List<DiagnosticoEncontrado> diagnosticoEncontradoList) {
+        this.diagnosticoEncontradoList = diagnosticoEncontradoList;
+    }
+
+    public Agenda getIdAgenda() {
+        return idAgenda;
+    }
+
+    public void setIdAgenda(Agenda idAgenda) {
+        this.idAgenda = idAgenda;
+    }
+
+    @XmlTransient
     public List<ExamenRadiologicoIndicado> getExamenRadiologicoIndicadoList() {
         return examenRadiologicoIndicadoList;
     }
 
     public void setExamenRadiologicoIndicadoList(List<ExamenRadiologicoIndicado> examenRadiologicoIndicadoList) {
         this.examenRadiologicoIndicadoList = examenRadiologicoIndicadoList;
+    }
+
+    @XmlTransient
+    public List<ExamenClinicoIndicado> getExamenClinicoIndicadoList() {
+        return examenClinicoIndicadoList;
+    }
+
+    public void setExamenClinicoIndicadoList(List<ExamenClinicoIndicado> examenClinicoIndicadoList) {
+        this.examenClinicoIndicadoList = examenClinicoIndicadoList;
     }
 
     @XmlTransient

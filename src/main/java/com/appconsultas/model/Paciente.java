@@ -15,10 +15,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -41,11 +41,11 @@ public class Paciente implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_paciente")
     private Integer idPaciente;
-    @JoinColumn(name = "id_persona", referencedColumnName = "id_persona")
-    @ManyToOne(optional = false)
-    private Persona idPersona;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPaciente")
     private List<Agenda> agendaList;
+    @JoinColumn(name = "id_persona", referencedColumnName = "id_persona")
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
+    private Persona idPersona;
 
     public Paciente() {
     }
@@ -62,14 +62,6 @@ public class Paciente implements Serializable {
         this.idPaciente = idPaciente;
     }
 
-    public Persona getIdPersona() {
-        return idPersona;
-    }
-
-    public void setIdPersona(Persona idPersona) {
-        this.idPersona = idPersona;
-    }
-
     @XmlTransient
     public List<Agenda> getAgendaList() {
         return agendaList;
@@ -77,6 +69,14 @@ public class Paciente implements Serializable {
 
     public void setAgendaList(List<Agenda> agendaList) {
         this.agendaList = agendaList;
+    }
+
+    public Persona getIdPersona() {
+        return idPersona;
+    }
+
+    public void setIdPersona(Persona idPersona) {
+        this.idPersona = idPersona;
     }
 
     @Override
