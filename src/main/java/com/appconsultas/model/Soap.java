@@ -6,9 +6,7 @@
 package com.appconsultas.model;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,9 +14,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -26,13 +24,14 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "soap")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Soap.findAll", query = "SELECT s FROM Soap s")
     , @NamedQuery(name = "Soap.findByIdSOAP", query = "SELECT s FROM Soap s WHERE s.idSOAP = :idSOAP")
-    , @NamedQuery(name = "Soap.findBySubjetivo", query = "SELECT s FROM Soap s WHERE s.subjetivo = :subjetivo")
-    , @NamedQuery(name = "Soap.findByObjetivo", query = "SELECT s FROM Soap s WHERE s.objetivo = :objetivo")
     , @NamedQuery(name = "Soap.findByAnalisis", query = "SELECT s FROM Soap s WHERE s.analisis = :analisis")
-    , @NamedQuery(name = "Soap.findByPlan", query = "SELECT s FROM Soap s WHERE s.plan = :plan")})
+    , @NamedQuery(name = "Soap.findByObjetivo", query = "SELECT s FROM Soap s WHERE s.objetivo = :objetivo")
+    , @NamedQuery(name = "Soap.findByPlan", query = "SELECT s FROM Soap s WHERE s.plan = :plan")
+    , @NamedQuery(name = "Soap.findBySubjetivo", query = "SELECT s FROM Soap s WHERE s.subjetivo = :subjetivo")})
 public class Soap implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,20 +40,18 @@ public class Soap implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_SOAP")
     private Integer idSOAP;
-    @Size(max = 45)
-    @Column(name = "subjetivo")
-    private String subjetivo;
-    @Size(max = 45)
-    @Column(name = "objetivo")
-    private String objetivo;
-    @Size(max = 45)
+    @Size(max = 255)
     @Column(name = "analisis")
     private String analisis;
-    @Size(max = 45)
+    @Size(max = 255)
+    @Column(name = "objetivo")
+    private String objetivo;
+    @Size(max = 255)
     @Column(name = "plan")
     private String plan;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idSOAP")
-    private List<Episodio> episodioList;
+    @Size(max = 255)
+    @Column(name = "subjetivo")
+    private String subjetivo;
 
     public Soap() {
     }
@@ -71,12 +68,12 @@ public class Soap implements Serializable {
         this.idSOAP = idSOAP;
     }
 
-    public String getSubjetivo() {
-        return subjetivo;
+    public String getAnalisis() {
+        return analisis;
     }
 
-    public void setSubjetivo(String subjetivo) {
-        this.subjetivo = subjetivo;
+    public void setAnalisis(String analisis) {
+        this.analisis = analisis;
     }
 
     public String getObjetivo() {
@@ -87,14 +84,6 @@ public class Soap implements Serializable {
         this.objetivo = objetivo;
     }
 
-    public String getAnalisis() {
-        return analisis;
-    }
-
-    public void setAnalisis(String analisis) {
-        this.analisis = analisis;
-    }
-
     public String getPlan() {
         return plan;
     }
@@ -103,12 +92,12 @@ public class Soap implements Serializable {
         this.plan = plan;
     }
 
-    public List<Episodio> getEpisodioList() {
-        return episodioList;
+    public String getSubjetivo() {
+        return subjetivo;
     }
 
-    public void setEpisodioList(List<Episodio> episodioList) {
-        this.episodioList = episodioList;
+    public void setSubjetivo(String subjetivo) {
+        this.subjetivo = subjetivo;
     }
 
     @Override

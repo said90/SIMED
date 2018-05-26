@@ -12,6 +12,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,8 +23,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -30,34 +33,38 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "agenda")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Agenda.findAll", query = "SELECT a FROM Agenda a")
     , @NamedQuery(name = "Agenda.findByIdAgenda", query = "SELECT a FROM Agenda a WHERE a.idAgenda = :idAgenda")
-    , @NamedQuery(name = "Agenda.findByFechaActual", query = "SELECT a FROM Agenda a WHERE a.fechaActual = :fechaActual")
+    , @NamedQuery(name = "Agenda.findByFechaRegistro", query = "SELECT a FROM Agenda a WHERE a.fechaRegistro = :fechaRegistro")
     , @NamedQuery(name = "Agenda.findByFechaCita", query = "SELECT a FROM Agenda a WHERE a.fechaCita = :fechaCita")
     , @NamedQuery(name = "Agenda.findByEstado", query = "SELECT a FROM Agenda a WHERE a.estado = :estado")})
 public class Agenda implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id_agenda")
     private Integer idAgenda;
-    @Column(name = "fecha_actual")
+    @Column(name = "fecha_registro")
     @Temporal(TemporalType.DATE)
-    private Date fechaActual;
+    private Date fechaRegistro;
     @Column(name = "fecha_cita")
     @Temporal(TemporalType.DATE)
     private Date fechaCita;
     @Size(max = 45)
     @Column(name = "estado")
     private String estado;
-    @JoinColumn(name = "id_persona", referencedColumnName = "id_persona")
-    @ManyToOne(optional = false)
-    private Persona idPersona;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAgenda")
     private List<Episodio> episodioList;
+    @JoinColumn(name = "id_medico", referencedColumnName = "id_medico")
+    @ManyToOne(optional = false)
+    private Medico idMedico;
+    @JoinColumn(name = "id_paciente", referencedColumnName = "id_paciente")
+    @ManyToOne(optional = false)
+    private Paciente idPaciente;
 
     public Agenda() {
     }
@@ -74,12 +81,12 @@ public class Agenda implements Serializable {
         this.idAgenda = idAgenda;
     }
 
-    public Date getFechaActual() {
-        return fechaActual;
+    public Date getFechaRegistro() {
+        return fechaRegistro;
     }
 
-    public void setFechaActual(Date fechaActual) {
-        this.fechaActual = fechaActual;
+    public void setFechaRegistro(Date fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
     }
 
     public Date getFechaCita() {
@@ -98,20 +105,29 @@ public class Agenda implements Serializable {
         this.estado = estado;
     }
 
-    public Persona getIdPersona() {
-        return idPersona;
-    }
-
-    public void setIdPersona(Persona idPersona) {
-        this.idPersona = idPersona;
-    }
-
+    @XmlTransient
     public List<Episodio> getEpisodioList() {
         return episodioList;
     }
 
     public void setEpisodioList(List<Episodio> episodioList) {
         this.episodioList = episodioList;
+    }
+
+    public Medico getIdMedico() {
+        return idMedico;
+    }
+
+    public void setIdMedico(Medico idMedico) {
+        this.idMedico = idMedico;
+    }
+
+    public Paciente getIdPaciente() {
+        return idPaciente;
+    }
+
+    public void setIdPaciente(Paciente idPaciente) {
+        this.idPaciente = idPaciente;
     }
 
     @Override

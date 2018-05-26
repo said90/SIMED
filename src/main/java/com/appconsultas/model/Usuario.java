@@ -7,7 +7,6 @@ package com.appconsultas.model;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,9 +16,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -27,6 +26,7 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "usuario")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
     , @NamedQuery(name = "Usuario.findByIdUsuario", query = "SELECT u FROM Usuario u WHERE u.idUsuario = :idUsuario")
@@ -49,8 +49,8 @@ public class Usuario implements Serializable {
     private String clave;
     @Column(name = "estado")
     private Short estado;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_persona", nullable = false)
+    @JoinColumn(name = "id_persona", referencedColumnName = "id_persona")
+    @ManyToOne(optional = false)
     private Persona idPersona;
     @JoinColumn(name = "id_tipo_usuario", referencedColumnName = "id_tipo_usuario")
     @ManyToOne(optional = false)
@@ -70,8 +70,6 @@ public class Usuario implements Serializable {
     public void setIdUsuario(Integer idUsuario) {
         this.idUsuario = idUsuario;
     }
-
-
 
     public String getUsuario() {
         return usuario;
@@ -137,5 +135,5 @@ public class Usuario implements Serializable {
     public String toString() {
         return "com.appconsultas.model.Usuario[ idUsuario=" + idUsuario + " ]";
     }
-
+    
 }

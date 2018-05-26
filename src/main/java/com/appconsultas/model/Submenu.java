@@ -8,7 +8,6 @@ package com.appconsultas.model;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,6 +18,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -26,12 +27,13 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "submenu")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Submenu.findAll", query = "SELECT s FROM Submenu s")
     , @NamedQuery(name = "Submenu.findByIdsubMenu", query = "SELECT s FROM Submenu s WHERE s.idsubMenu = :idsubMenu")
+    , @NamedQuery(name = "Submenu.findByEstado", query = "SELECT s FROM Submenu s WHERE s.estado = :estado")
     , @NamedQuery(name = "Submenu.findByNombre", query = "SELECT s FROM Submenu s WHERE s.nombre = :nombre")
-    , @NamedQuery(name = "Submenu.findByUrl", query = "SELECT s FROM Submenu s WHERE s.url = :url")
-    , @NamedQuery(name = "Submenu.findByEstado", query = "SELECT s FROM Submenu s WHERE s.estado = :estado")})
+    , @NamedQuery(name = "Submenu.findByUrl", query = "SELECT s FROM Submenu s WHERE s.url = :url")})
 public class Submenu implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,15 +42,15 @@ public class Submenu implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_subMenu")
     private Integer idsubMenu;
-    @Size(max = 45)
-    @Column(name = "nombre")
-    private String nombre;
-    @Size(max = 100)
-    @Column(name = "url")
-    private String url;
     @Column(name = "estado")
     private Short estado;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idsubMenu")
+    @Size(max = 255)
+    @Column(name = "nombre")
+    private String nombre;
+    @Size(max = 255)
+    @Column(name = "url")
+    private String url;
+    @OneToMany(mappedBy = "idsubMenu")
     private List<Item> itemList;
 
     public Submenu() {
@@ -64,6 +66,14 @@ public class Submenu implements Serializable {
 
     public void setIdsubMenu(Integer idsubMenu) {
         this.idsubMenu = idsubMenu;
+    }
+
+    public Short getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Short estado) {
+        this.estado = estado;
     }
 
     public String getNombre() {
@@ -82,14 +92,7 @@ public class Submenu implements Serializable {
         this.url = url;
     }
 
-    public Short getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Short estado) {
-        this.estado = estado;
-    }
-
+    @XmlTransient
     public List<Item> getItemList() {
         return itemList;
     }

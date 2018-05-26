@@ -19,6 +19,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -26,6 +28,7 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "especialista")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Especialista.findAll", query = "SELECT e FROM Especialista e")
     , @NamedQuery(name = "Especialista.findByIdEspecialista", query = "SELECT e FROM Especialista e WHERE e.idEspecialista = :idEspecialista")
@@ -67,6 +70,7 @@ public class Especialista implements Serializable {
         this.descripcion = descripcion;
     }
 
+    @XmlTransient
     public List<Referencia> getReferenciaList() {
         return referenciaList;
     }

@@ -17,6 +17,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -24,6 +25,7 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "telefono")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Telefono.findAll", query = "SELECT t FROM Telefono t")
     , @NamedQuery(name = "Telefono.findByIdTelefono", query = "SELECT t FROM Telefono t WHERE t.idTelefono = :idTelefono")
@@ -36,11 +38,11 @@ public class Telefono implements Serializable {
     @NotNull
     @Column(name = "id_telefono")
     private Integer idTelefono;
-    @Size(max = 10)
+    @Size(max = 255)
     @Column(name = "numero")
     private String numero;
     @JoinColumn(name = "id_persona", referencedColumnName = "id_persona")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Persona idPersona;
 
     public Telefono() {

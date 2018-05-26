@@ -8,7 +8,7 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-      
+
         <title>SIMED</title>
     </h:head>
 
@@ -19,8 +19,38 @@
                 <h:form>
                     <p:panel  style="width: 100%;margin: 0 auto; text-align:center;
                               padding: 5px; text-align: justify;font-size: 14px">
-                        <p:menubar model="#{loginController.model}">
+                        <p:menubar>
 
+                            <p:submenu label="Administracion" >
+                                <p:menuitem value="Usuarios" url="/administracion/usuario.xhtml" />
+                                <p:menuitem value="Permisos" url="/administracion/Permisos.xhtml" />
+                            </p:submenu>
+
+                            <p:submenu label="Catalogos" >
+                                <p:menuitem value="Pacientes" url="/catalogos/pacientes.xhtml" />
+                                <p:menuitem value="Medicos" url="/catalogos/medicos.xhtml" />
+                                <p:menuitem value="Diagnosticos" url="/catalogos/diagnosticos.xhtml" />
+                                <p:menuitem value="Especialistas" url="/catalogos/especialistas.xhtml" />
+                                <p:menuitem value="Examenes de Laboratorio Clinico" url="/catalogos/examenlaboratorio.xhtml" />
+                                <p:menuitem value="Examenes de Radiologia" url="/catalogos/examenradiologico.xhtml" />
+                                <p:menuitem value="Medicamentos" url="/catalogos/medicamentos.xhtml" />
+                                <p:menuitem value="Tipo de Usuario" url="/catalogos/tipoUsuario.xhtml" />
+                            </p:submenu>
+
+                            <p:submenu label="Agenda" >
+                                <p:menuitem value="Agendar Paciente" url="#" />
+
+                            </p:submenu>
+                            <p:submenu label="Consulta Medica" >
+                                <p:menuitem value="Pacientes Asignados" url="#" />
+                                <p:menuitem value="Historial Clinico de Paciente" url="#" />
+
+                            </p:submenu>
+                            <p:submenu label="Reportes" >
+                                <p:menuitem value="Agenda de pacientes" url="#" />
+                                <p:menuitem value="Pacientes por medico" url="#" />
+
+                            </p:submenu>
                             <f:facet name="options">
                                 <p:outputLabel value="Bienvenido #{usuarioController.usuario.usuario}"/>
                                 <p:outputLabel value="      | "/>
@@ -39,7 +69,7 @@
 
         <div id="content" class="center_content">
             <ui:insert name="content"> <p:panel  style="height: 100%; width: 80%;margin: 0 auto; text-align:center;align-content: center ;
-                          padding: 5px; text-align: justify;font-size: 32px;font-style: italic; ">
+                                                 padding: 5px; text-align: justify;font-size: 32px;font-style: italic; ">
                     <p:panelGrid layout="grid" columns="1" style="margin: 0 auto;text-align: center" >
                         <p:outputLabel value="SISTEMA DE REGISTRO DE CONSULTAS MEDICAS"/>
                         <p:separator/>

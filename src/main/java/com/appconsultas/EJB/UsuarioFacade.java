@@ -31,7 +31,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
         super(Usuario.class);
     }
     
-      @Override
+    @Override
     public Usuario iniciarSesion(Usuario us) {
         Usuario usuario = null;
         try {
@@ -49,6 +49,6 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
         } 
         
         return usuario;
-}
+    }
     
 }

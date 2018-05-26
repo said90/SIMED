@@ -5,7 +5,7 @@
  */
 package com.appconsultas.EJB;
 
-import com.appconsultas.model.Usuario;
+import com.appconsultas.model.Incapacidad;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -14,22 +14,20 @@ import javax.ejb.Local;
  * @author bsf_o
  */
 @Local
-public interface UsuarioFacadeLocal {
+public interface IncapacidadFacadeLocal {
 
-    void create(Usuario usuario);
+    void create(Incapacidad incapacidad);
 
-    void edit(Usuario usuario);
+    void edit(Incapacidad incapacidad);
 
-    void remove(Usuario usuario);
+    void remove(Incapacidad incapacidad);
 
-    Usuario find(Object id);
+    Incapacidad find(Object id);
 
-    List<Usuario> findAll();
+    List<Incapacidad> findAll();
 
-    List<Usuario> findRange(int[] range);
+    List<Incapacidad> findRange(int[] range);
 
     int count();
-
-    Usuario iniciarSesion(Usuario us);
-
+    
 }

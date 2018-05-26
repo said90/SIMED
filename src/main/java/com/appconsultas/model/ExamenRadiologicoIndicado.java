@@ -6,7 +6,9 @@
 package com.appconsultas.model;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,8 +18,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -25,10 +30,11 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "examen_radiologico_indicado")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "ExamenRadiologicoIndicado.findAll", query = "SELECT e FROM ExamenRadiologicoIndicado e")
     , @NamedQuery(name = "ExamenRadiologicoIndicado.findByIdExamenRadiologicoIndicados", query = "SELECT e FROM ExamenRadiologicoIndicado e WHERE e.idExamenRadiologicoIndicados = :idExamenRadiologicoIndicados")
-    , @NamedQuery(name = "ExamenRadiologicoIndicado.findByResultado", query = "SELECT e FROM ExamenRadiologicoIndicado e WHERE e.resultado = :resultado")})
+    , @NamedQuery(name = "ExamenRadiologicoIndicado.findByJustificacion", query = "SELECT e FROM ExamenRadiologicoIndicado e WHERE e.justificacion = :justificacion")})
 public class ExamenRadiologicoIndicado implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,8 +44,10 @@ public class ExamenRadiologicoIndicado implements Serializable {
     @Column(name = "id_examen_radiologico_indicados")
     private Integer idExamenRadiologicoIndicados;
     @Size(max = 45)
-    @Column(name = "resultado")
-    private String resultado;
+    @Column(name = "justificacion")
+    private String justificacion;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idExamenRadiologicoIndicados")
+    private List<ResultadoExamenRadiologico> resultadoExamenRadiologicoList;
     @JoinColumn(name = "id_episodio", referencedColumnName = "id_episodio")
     @ManyToOne(optional = false)
     private Episodio idEpisodio;
@@ -62,12 +70,21 @@ public class ExamenRadiologicoIndicado implements Serializable {
         this.idExamenRadiologicoIndicados = idExamenRadiologicoIndicados;
     }
 
-    public String getResultado() {
-        return resultado;
+    public String getJustificacion() {
+        return justificacion;
     }
 
-    public void setResultado(String resultado) {
-        this.resultado = resultado;
+    public void setJustificacion(String justificacion) {
+        this.justificacion = justificacion;
+    }
+
+    @XmlTransient
+    public List<ResultadoExamenRadiologico> getResultadoExamenRadiologicoList() {
+        return resultadoExamenRadiologicoList;
+    }
+
+    public void setResultadoExamenRadiologicoList(List<ResultadoExamenRadiologico> resultadoExamenRadiologicoList) {
+        this.resultadoExamenRadiologicoList = resultadoExamenRadiologicoList;
     }
 
     public Episodio getIdEpisodio() {

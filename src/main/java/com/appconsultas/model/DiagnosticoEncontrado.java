@@ -18,6 +18,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -25,10 +26,11 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "diagnostico_encontrado")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "DiagnosticoEncontrado.findAll", query = "SELECT d FROM DiagnosticoEncontrado d")
     , @NamedQuery(name = "DiagnosticoEncontrado.findByIdDiagnosticoEncontrado", query = "SELECT d FROM DiagnosticoEncontrado d WHERE d.idDiagnosticoEncontrado = :idDiagnosticoEncontrado")
-    , @NamedQuery(name = "DiagnosticoEncontrado.findByCausa", query = "SELECT d FROM DiagnosticoEncontrado d WHERE d.causa = :causa")})
+    , @NamedQuery(name = "DiagnosticoEncontrado.findByEstado", query = "SELECT d FROM DiagnosticoEncontrado d WHERE d.estado = :estado")})
 public class DiagnosticoEncontrado implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,8 +40,8 @@ public class DiagnosticoEncontrado implements Serializable {
     @Column(name = "id_diagnostico_encontrado")
     private Integer idDiagnosticoEncontrado;
     @Size(max = 45)
-    @Column(name = "causa")
-    private String causa;
+    @Column(name = "estado")
+    private String estado;
     @JoinColumn(name = "id_diagnostico", referencedColumnName = "id_diagnostico")
     @ManyToOne(optional = false)
     private Diagnostico idDiagnostico;
@@ -62,12 +64,12 @@ public class DiagnosticoEncontrado implements Serializable {
         this.idDiagnosticoEncontrado = idDiagnosticoEncontrado;
     }
 
-    public String getCausa() {
-        return causa;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setCausa(String causa) {
-        this.causa = causa;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public Diagnostico getIdDiagnostico() {

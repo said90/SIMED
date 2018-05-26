@@ -15,8 +15,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -24,6 +22,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -31,6 +31,7 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "persona")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Persona.findAll", query = "SELECT p FROM Persona p")
     , @NamedQuery(name = "Persona.findByIdPersona", query = "SELECT p FROM Persona p WHERE p.idPersona = :idPersona")
@@ -40,7 +41,8 @@ import javax.validation.constraints.Size;
     , @NamedQuery(name = "Persona.findBySexo", query = "SELECT p FROM Persona p WHERE p.sexo = :sexo")
     , @NamedQuery(name = "Persona.findByFechaDeNacimiento", query = "SELECT p FROM Persona p WHERE p.fechaDeNacimiento = :fechaDeNacimiento")
     , @NamedQuery(name = "Persona.findByEstadoCivil", query = "SELECT p FROM Persona p WHERE p.estadoCivil = :estadoCivil")
-    , @NamedQuery(name = "Persona.findByDireccion", query = "SELECT p FROM Persona p WHERE p.direccion = :direccion")})
+    , @NamedQuery(name = "Persona.findByDireccion", query = "SELECT p FROM Persona p WHERE p.direccion = :direccion")
+    , @NamedQuery(name = "Persona.findByTelefono", query = "SELECT p FROM Persona p WHERE p.telefono = :telefono")})
 public class Persona implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -70,13 +72,17 @@ public class Persona implements Serializable {
     @Size(max = 45)
     @Column(name = "direccion")
     private String direccion;
-    @JoinColumn(name = "idTipoPersona", referencedColumnName = "idTipoPersona")
-    @ManyToOne(optional = false)
-    private Tipopersona idTipoPersona;
+    @Size(max = 10)
+    @Column(name = "telefono")
+    private String telefono;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersona")
-    private List<Agenda> agendaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersona")
+    private List<Paciente> pacienteList;
+    @OneToMany(mappedBy = "idPersona")
     private List<Telefono> telefonoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersona")
+    private List<Medico> medicoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersona")
+    private List<Usuario> usuarioList;
 
     public Persona() {
     }
@@ -149,29 +155,48 @@ public class Persona implements Serializable {
         this.direccion = direccion;
     }
 
-    public Tipopersona getIdTipoPersona() {
-        return idTipoPersona;
+    public String getTelefono() {
+        return telefono;
     }
 
-    public void setIdTipoPersona(Tipopersona idTipoPersona) {
-        this.idTipoPersona = idTipoPersona;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
-    public List<Agenda> getAgendaList() {
-        return agendaList;
+    @XmlTransient
+    public List<Paciente> getPacienteList() {
+        return pacienteList;
     }
 
-    public void setAgendaList(List<Agenda> agendaList) {
-        this.agendaList = agendaList;
+    public void setPacienteList(List<Paciente> pacienteList) {
+        this.pacienteList = pacienteList;
     }
 
-
+    @XmlTransient
     public List<Telefono> getTelefonoList() {
         return telefonoList;
     }
 
     public void setTelefonoList(List<Telefono> telefonoList) {
         this.telefonoList = telefonoList;
+    }
+
+    @XmlTransient
+    public List<Medico> getMedicoList() {
+        return medicoList;
+    }
+
+    public void setMedicoList(List<Medico> medicoList) {
+        this.medicoList = medicoList;
+    }
+
+    @XmlTransient
+    public List<Usuario> getUsuarioList() {
+        return usuarioList;
+    }
+
+    public void setUsuarioList(List<Usuario> usuarioList) {
+        this.usuarioList = usuarioList;
     }
 
     @Override

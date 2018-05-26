@@ -19,6 +19,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -26,12 +28,14 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "medicamento")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Medicamento.findAll", query = "SELECT m FROM Medicamento m")
     , @NamedQuery(name = "Medicamento.findByIdMedicamento", query = "SELECT m FROM Medicamento m WHERE m.idMedicamento = :idMedicamento")
     , @NamedQuery(name = "Medicamento.findByNombreComercial", query = "SELECT m FROM Medicamento m WHERE m.nombreComercial = :nombreComercial")
     , @NamedQuery(name = "Medicamento.findByNombreGenerico", query = "SELECT m FROM Medicamento m WHERE m.nombreGenerico = :nombreGenerico")
-    , @NamedQuery(name = "Medicamento.findByComposicion", query = "SELECT m FROM Medicamento m WHERE m.composicion = :composicion")})
+    , @NamedQuery(name = "Medicamento.findByComposicion", query = "SELECT m FROM Medicamento m WHERE m.composicion = :composicion")
+    , @NamedQuery(name = "Medicamento.findByPresentacion", query = "SELECT m FROM Medicamento m WHERE m.presentacion = :presentacion")})
 public class Medicamento implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,6 +53,9 @@ public class Medicamento implements Serializable {
     @Size(max = 45)
     @Column(name = "composicion")
     private String composicion;
+    @Size(max = 45)
+    @Column(name = "presentacion")
+    private String presentacion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMedicamento")
     private List<MedicamentosIndicados> medicamentosIndicadosList;
 
@@ -91,6 +98,15 @@ public class Medicamento implements Serializable {
         this.composicion = composicion;
     }
 
+    public String getPresentacion() {
+        return presentacion;
+    }
+
+    public void setPresentacion(String presentacion) {
+        this.presentacion = presentacion;
+    }
+
+    @XmlTransient
     public List<MedicamentosIndicados> getMedicamentosIndicadosList() {
         return medicamentosIndicadosList;
     }

@@ -19,6 +19,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -26,6 +28,7 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "tipo_usuario")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TipoUsuario.findAll", query = "SELECT t FROM TipoUsuario t")
     , @NamedQuery(name = "TipoUsuario.findByIdTipoUsuario", query = "SELECT t FROM TipoUsuario t WHERE t.idTipoUsuario = :idTipoUsuario")
@@ -41,8 +44,10 @@ public class TipoUsuario implements Serializable {
     @Size(max = 45)
     @Column(name = "tipo_usuario")
     private String tipoUsuario;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTipoUsuario")
+    @OneToMany(mappedBy = "idTipoUsuario")
     private List<Item> itemList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTipoUsuario")
+    private List<Menu> menuList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTipoUsuario")
     private List<Usuario> usuarioList;
 
@@ -69,6 +74,7 @@ public class TipoUsuario implements Serializable {
         this.tipoUsuario = tipoUsuario;
     }
 
+    @XmlTransient
     public List<Item> getItemList() {
         return itemList;
     }
@@ -77,6 +83,16 @@ public class TipoUsuario implements Serializable {
         this.itemList = itemList;
     }
 
+    @XmlTransient
+    public List<Menu> getMenuList() {
+        return menuList;
+    }
+
+    public void setMenuList(List<Menu> menuList) {
+        this.menuList = menuList;
+    }
+
+    @XmlTransient
     public List<Usuario> getUsuarioList() {
         return usuarioList;
     }

@@ -6,7 +6,9 @@
 package com.appconsultas.model;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,8 +18,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -25,10 +30,11 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "referencia")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Referencia.findAll", query = "SELECT r FROM Referencia r")
     , @NamedQuery(name = "Referencia.findByIdReferencia", query = "SELECT r FROM Referencia r WHERE r.idReferencia = :idReferencia")
-    , @NamedQuery(name = "Referencia.findByMotivoRefenrencia", query = "SELECT r FROM Referencia r WHERE r.motivoRefenrencia = :motivoRefenrencia")})
+    , @NamedQuery(name = "Referencia.findByMotivoReferencia", query = "SELECT r FROM Referencia r WHERE r.motivoReferencia = :motivoReferencia")})
 public class Referencia implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,8 +44,10 @@ public class Referencia implements Serializable {
     @Column(name = "id_referencia")
     private Integer idReferencia;
     @Size(max = 45)
-    @Column(name = "motivo_refenrencia")
-    private String motivoRefenrencia;
+    @Column(name = "motivo_referencia")
+    private String motivoReferencia;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idReferencia")
+    private List<IndicacionEspecialista> indicacionEspecialistaList;
     @JoinColumn(name = "id_episodio", referencedColumnName = "id_episodio")
     @ManyToOne(optional = false)
     private Episodio idEpisodio;
@@ -62,12 +70,21 @@ public class Referencia implements Serializable {
         this.idReferencia = idReferencia;
     }
 
-    public String getMotivoRefenrencia() {
-        return motivoRefenrencia;
+    public String getMotivoReferencia() {
+        return motivoReferencia;
     }
 
-    public void setMotivoRefenrencia(String motivoRefenrencia) {
-        this.motivoRefenrencia = motivoRefenrencia;
+    public void setMotivoReferencia(String motivoReferencia) {
+        this.motivoReferencia = motivoReferencia;
+    }
+
+    @XmlTransient
+    public List<IndicacionEspecialista> getIndicacionEspecialistaList() {
+        return indicacionEspecialistaList;
+    }
+
+    public void setIndicacionEspecialistaList(List<IndicacionEspecialista> indicacionEspecialistaList) {
+        this.indicacionEspecialistaList = indicacionEspecialistaList;
     }
 
     public Episodio getIdEpisodio() {

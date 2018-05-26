@@ -6,6 +6,7 @@
 package com.appconsultas.model;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,66 +17,70 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author bsf_o
  */
 @Entity
-@Table(name = "item")
+@Table(name = "menu")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Item.findAll", query = "SELECT i FROM Item i")
-    , @NamedQuery(name = "Item.findByIditemMenu", query = "SELECT i FROM Item i WHERE i.iditemMenu = :iditemMenu")
-    , @NamedQuery(name = "Item.findByEstado", query = "SELECT i FROM Item i WHERE i.estado = :estado")
-    , @NamedQuery(name = "Item.findByNombre", query = "SELECT i FROM Item i WHERE i.nombre = :nombre")
-    , @NamedQuery(name = "Item.findByUrl", query = "SELECT i FROM Item i WHERE i.url = :url")})
-public class Item implements Serializable {
+    @NamedQuery(name = "Menu.findAll", query = "SELECT m FROM Menu m")
+    , @NamedQuery(name = "Menu.findByCodigoMenu", query = "SELECT m FROM Menu m WHERE m.codigoMenu = :codigoMenu")
+    , @NamedQuery(name = "Menu.findByEstado", query = "SELECT m FROM Menu m WHERE m.estado = :estado")
+    , @NamedQuery(name = "Menu.findByNombre", query = "SELECT m FROM Menu m WHERE m.nombre = :nombre")
+    , @NamedQuery(name = "Menu.findByUrl", query = "SELECT m FROM Menu m WHERE m.url = :url")})
+public class Menu implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_itemMenu")
-    private Integer iditemMenu;
+    @Column(name = "CODIGO_MENU")
+    private Integer codigoMenu;
     @Column(name = "estado")
-    private Short estado;
+    private Boolean estado;
     @Size(max = 255)
     @Column(name = "nombre")
     private String nombre;
-    @Size(max = 255)
+    @Size(max = 100)
     @Column(name = "url")
     private String url;
-    @JoinColumn(name = "id_subMenu", referencedColumnName = "id_subMenu")
+    @OneToMany(mappedBy = "codigoSubmenu")
+    private List<Menu> menuList;
+    @JoinColumn(name = "codigo_submenu", referencedColumnName = "CODIGO_MENU")
     @ManyToOne
-    private Submenu idsubMenu;
+    private Menu codigoSubmenu;
     @JoinColumn(name = "id_tipo_usuario", referencedColumnName = "id_tipo_usuario")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private TipoUsuario idTipoUsuario;
 
-    public Item() {
+    public Menu() {
     }
 
-    public Item(Integer iditemMenu) {
-        this.iditemMenu = iditemMenu;
+    public Menu(Integer codigoMenu) {
+        this.codigoMenu = codigoMenu;
     }
 
-    public Integer getIditemMenu() {
-        return iditemMenu;
+    public Integer getCodigoMenu() {
+        return codigoMenu;
     }
 
-    public void setIditemMenu(Integer iditemMenu) {
-        this.iditemMenu = iditemMenu;
+    public void setCodigoMenu(Integer codigoMenu) {
+        this.codigoMenu = codigoMenu;
     }
 
-    public Short getEstado() {
+    public Boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(Short estado) {
+    public void setEstado(Boolean estado) {
         this.estado = estado;
     }
 
@@ -95,12 +100,21 @@ public class Item implements Serializable {
         this.url = url;
     }
 
-    public Submenu getIdsubMenu() {
-        return idsubMenu;
+    @XmlTransient
+    public List<Menu> getMenuList() {
+        return menuList;
     }
 
-    public void setIdsubMenu(Submenu idsubMenu) {
-        this.idsubMenu = idsubMenu;
+    public void setMenuList(List<Menu> menuList) {
+        this.menuList = menuList;
+    }
+
+    public Menu getCodigoSubmenu() {
+        return codigoSubmenu;
+    }
+
+    public void setCodigoSubmenu(Menu codigoSubmenu) {
+        this.codigoSubmenu = codigoSubmenu;
     }
 
     public TipoUsuario getIdTipoUsuario() {
@@ -114,18 +128,18 @@ public class Item implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (iditemMenu != null ? iditemMenu.hashCode() : 0);
+        hash += (codigoMenu != null ? codigoMenu.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Item)) {
+        if (!(object instanceof Menu)) {
             return false;
         }
-        Item other = (Item) object;
-        if ((this.iditemMenu == null && other.iditemMenu != null) || (this.iditemMenu != null && !this.iditemMenu.equals(other.iditemMenu))) {
+        Menu other = (Menu) object;
+        if ((this.codigoMenu == null && other.codigoMenu != null) || (this.codigoMenu != null && !this.codigoMenu.equals(other.codigoMenu))) {
             return false;
         }
         return true;
@@ -133,7 +147,7 @@ public class Item implements Serializable {
 
     @Override
     public String toString() {
-        return "com.appconsultas.model.Item[ iditemMenu=" + iditemMenu + " ]";
+        return "com.appconsultas.model.Menu[ codigoMenu=" + codigoMenu + " ]";
     }
     
 }

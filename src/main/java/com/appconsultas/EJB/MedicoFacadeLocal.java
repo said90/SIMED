@@ -5,7 +5,7 @@
  */
 package com.appconsultas.EJB;
 
-import com.appconsultas.model.Usuario;
+import com.appconsultas.model.Medico;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -14,22 +14,20 @@ import javax.ejb.Local;
  * @author bsf_o
  */
 @Local
-public interface UsuarioFacadeLocal {
+public interface MedicoFacadeLocal {
 
-    void create(Usuario usuario);
+    void create(Medico medico);
 
-    void edit(Usuario usuario);
+    void edit(Medico medico);
 
-    void remove(Usuario usuario);
+    void remove(Medico medico);
 
-    Usuario find(Object id);
+    Medico find(Object id);
 
-    List<Usuario> findAll();
+    List<Medico> findAll();
 
-    List<Usuario> findRange(int[] range);
+    List<Medico> findRange(int[] range);
 
     int count();
-
-    Usuario iniciarSesion(Usuario us);
-
+    
 }

@@ -6,9 +6,7 @@
 package com.appconsultas.model;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,9 +14,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -26,6 +24,7 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "tipopersona")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Tipopersona.findAll", query = "SELECT t FROM Tipopersona t")
     , @NamedQuery(name = "Tipopersona.findByIdTipoPersona", query = "SELECT t FROM Tipopersona t WHERE t.idTipoPersona = :idTipoPersona")
@@ -38,11 +37,9 @@ public class Tipopersona implements Serializable {
     @Basic(optional = false)
     @Column(name = "idTipoPersona")
     private Integer idTipoPersona;
-    @Size(max = 45)
+    @Size(max = 255)
     @Column(name = "TipoPersona")
     private String tipoPersona;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTipoPersona")
-    private List<Persona> personaList;
 
     public Tipopersona() {
     }
@@ -65,14 +62,6 @@ public class Tipopersona implements Serializable {
 
     public void setTipoPersona(String tipoPersona) {
         this.tipoPersona = tipoPersona;
-    }
-
-    public List<Persona> getPersonaList() {
-        return personaList;
-    }
-
-    public void setPersonaList(List<Persona> personaList) {
-        this.personaList = personaList;
     }
 
     @Override
