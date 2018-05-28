@@ -21,4 +21,5 @@
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
     </jdbc-connection-pool>
     <jdbc-resource enabled="true" jndi-name="java:app/PUSIMED" object-type="user" pool-name="mysql_registromedico_rootPool"/>
+    <jdbc-resource enabled="true" jndi-name="java:app/PUConsulta_medica" object-type="user" pool-name="mysql_consultamedica_rootPool"/>
 </resources>
