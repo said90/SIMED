@@ -52,8 +52,11 @@ public class Agenda implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fechaRegistro;
     @Column(name = "fecha_cita")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fechaCita;
+    @Size(max = 45)
+    @Column(name = "motivo_consulta")
+    private String motivoConsulta;
     @Size(max = 45)
     @Column(name = "estado")
     private String estado;
@@ -95,6 +98,14 @@ public class Agenda implements Serializable {
 
     public void setFechaCita(Date fechaCita) {
         this.fechaCita = fechaCita;
+    }
+
+    public String getMotivoConsulta() {
+        return motivoConsulta;
+    }
+
+    public void setMotivoConsulta(String motivoConsulta) {
+        this.motivoConsulta = motivoConsulta;
     }
 
     public String getEstado() {
@@ -154,5 +165,5 @@ public class Agenda implements Serializable {
     public String toString() {
         return "com.appconsultas.model.Agenda[ idAgenda=" + idAgenda + " ]";
     }
-    
+
 }

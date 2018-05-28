@@ -34,10 +34,10 @@
                     <h:panelGrid columns="2">
 
                         <p:outputLabel for="txtUsuario" value="Usuario"/>
-                        <p:inputText id="txtUsuario" required="true" value="#{usuarioController.usuario.usuario}"/>
+                        <p:inputText id="txtUsuario" placeholder="Nombre de usuario" required="true" value="#{usuarioController.usuario.usuario}" />    
 
                         <p:outputLabel for="txtClave" value="Password" />
-                        <p:inputText id="txtClave" required="true" value="#{usuarioController.usuario.clave}"/>
+                        <p:inputText id="txtClave" placeholder="Contraseña" required="true" value="#{usuarioController.usuario.clave}"/>
 
                         <h:column/>
                         <p:commandButton value="Iniciar sesion" icon="ui-icon-key"
