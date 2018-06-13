@@ -74,6 +74,8 @@ public class AgendaController implements Serializable {
                     + " - " + "Medico Asignado: " + " Dr." + ca.getIdMedico().getIdPersona().getNombres() + ca.getIdMedico().getIdPersona().getApellidos()
                     + " - " + "Motivo de consulta: " + ca.getMotivoConsulta(),
                     ca.getFechaCita(), calendar.getTime()));
+           
+            
         }
     }
 

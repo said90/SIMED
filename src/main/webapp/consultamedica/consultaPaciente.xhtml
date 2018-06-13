@@ -1,0 +1,218 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../plantilla.xhtml">
+
+
+            <ui:define name="content">
+                <p:panel header="Consulta de Paciente"  id="panel"
+                         style="width: 100%; height: 100%;margin: 0 auto; text-align:center;align-self: center ;
+                         padding: 5px; text-align: justify;font-size: 14px">
+
+                    <h:form>
+                        <p:tabView   dynamic="true" effect="fold">
+                            <p:tab title="Datos  de Paciente">      
+                                <p:panel header="Consulta de Paciente" >
+                                    <p:panelGrid columns="2" layout="grid">
+                                        <p:outputLabel value="Fecha de Consulta"/>
+                                        <p:inputText value="#{episodioController.episodio.fechaConsulta}"/>
+                                        <p:outputLabel value="Nombre del paciente"/>
+                                        <p:outputLabel value="#{episodioController.cita.idPaciente.idPersona.nombres} #{episodioController.cita.idPaciente.idPersona.apellidos}"/>
+                                        <p:outputLabel value="Fecha de Nacimiento"/>
+                                        <p:outputLabel value="#{episodioController.cita.idPaciente.idPersona.fechaDeNacimiento}"/>
+                                    </p:panelGrid>
+                                </p:panel>
+                            </p:tab>
+                            <p:tab title="Episodio Clinico">    
+                                <p:panel header="Motivo de consulta">
+                                    <p:panelGrid columns="2"  layout="grid">
+                                        <p:outputLabel value="Actividad Primaria"/>
+                                        <p:selectOneMenu id="cboActividadPrimaria" value="#{episodioController.episodio.actividadPrimaria}"  
+                                                         effect="bounce"   filter="true" >
+                                            <f:selectItem itemLabel="-- Seleccione Actividad --" noSelectionOption="true"/>
+                                            <f:selectItem itemLabel="Control de medicamento cronico" itemValue="Control de medicamento cronico"/>
+                                            <f:selectItem itemLabel="Consulta Aguda" itemValue="Consulta Aguda"/>
+                                            <f:selectItem itemLabel="Respuesta de examenes" itemValue="Respuesta de examenes"/>
+                                        </p:selectOneMenu>
+
+                                        <p:outputLabel value="Tipo de consulta Primaria"/>
+                                        <p:selectOneMenu id="cboTipoConsultaPrimaria" value="#{episodioController.episodio.tipoConsultaPrimaria}"  
+                                                         effect="bounce"   filter="true" >
+                                            <f:selectItem itemLabel="-- Seleccione tipo --" noSelectionOption="true"/>
+                                            <f:selectItem itemLabel="Primera vez" itemValue="Primera vez"/>
+                                            <f:selectItem itemLabel="Subsecuente" itemValue="Subsecuente"/>
+                                        </p:selectOneMenu>
+
+                                        <p:outputLabel value="Actividad Secundaria"/>
+                                        <p:selectOneMenu id="cboActividadSecundaria" value="#{episodioController.episodio.actividadSecundaria}"  
+                                                         effect="bounce"   filter="true" >
+                                            <f:selectItem itemLabel="-- Seleccione Actividad --" noSelectionOption="true"/>
+                                            <f:selectItem itemLabel="Control de medicamento cronico" itemValue="Control de medicamento cronico"/>
+                                            <f:selectItem itemLabel="Consulta Aguda" itemValue="Consulta Aguda"/>
+                                            <f:selectItem itemLabel="Respuesta de examenes" itemValue="Respuesta de examenes"/>
+                                            <f:selectItem itemLabel="No aplica" itemValue="No aplica"/>
+                                        </p:selectOneMenu>
+
+                                        <p:outputLabel value="Tipo de consulta Secundaria"/>
+                                        <p:selectOneMenu id="cboTipoConsultaSecundaria" value="#{episodioController.episodio.tipoActividadSecundaria}"  
+                                                         effect="bounce"   filter="true" >
+                                            <f:selectItem itemLabel="-- Seleccione tipo --" noSelectionOption="true"/>
+                                            <f:selectItem itemLabel="Primera vez" itemValue="Primera vez"/>
+                                            <f:selectItem itemLabel="Subsecuente" itemValue="Subsecuente"/>
+                                            <f:selectItem itemLabel="No aplica" itemValue="No aplica"/>
+                                        </p:selectOneMenu>
+
+                                    </p:panelGrid>
+                                </p:panel>
+                            </p:tab>
+
+                            <p:tab title="Signos vitales">
+                                <p:panelGrid columns="2" layout="grid">
+                                    <p:outputLabel value="Temperatura C° "/>
+                                    <p:spinner value="#{episodioController.episodio.temperatura}" />
+                                    <p:outputLabel value="Frecuencia Cardiaca° "/>
+                                    <p:spinner value="#{episodioController.episodio.frecuenciaCardiaca}"/>
+                                    <p:outputLabel value="Frecuencia Respiratoria "/>
+                                    <p:spinner value="#{episodioController.episodio.frecuenciaCardiaca}"/>
+                                    <p:outputLabel value="Presión Arterial Sistolica "/>
+                                    <p:spinner value="#{episodioController.episodio.PArterialSistolica}"/>
+                                    <p:outputLabel value="Presión Arterial Diastolica "/>
+                                    <p:spinner value="#{episodioController.episodio.PArterialDiastolica}"/>
+                                    <p:outputLabel value="Peso (Kg) "/>
+                                    <p:spinner value="#{episodioController.episodio.peso}"/>
+                                    <p:outputLabel value="Talla (Mts) "/>
+                                    <p:spinner value="#{episodioController.episodio.talla}"/>
+                                    <p:outputLabel value="Indice de Masa Corporal "/>
+                                    <p:spinner value="#{episodioController.episodio.imc}"/>
+                                </p:panelGrid>
+
+                            </p:tab> 
+                            <p:tab title="Antecedentes">
+                                <p:panelGrid columns="2" layout="grid">
+                                    <p:outputLabel value="Antecedentes"/>
+                                    <p:inputTextarea value="#{episodioController.episodio.antecedentes}"/>
+                                </p:panelGrid>
+                            </p:tab>
+                            <p:tab title="SOAP">
+                                <p:panelGrid columns="2" layout="grid">
+                                    <p:outputLabel value="Subjetivo"/>
+                                    <p:inputTextarea value="#{episodioController.episodio.subjetivo}"/>
+                                    <p:outputLabel value="Objetivo"/>
+                                    <p:inputTextarea value="#{episodioController.episodio.objetivo}"/>
+                                    <p:outputLabel value="Analisis"/>
+                                    <p:inputTextarea value="#{episodioController.episodio.analisis}"/>
+                                    <p:outputLabel value="Plan"/>
+                                    <p:inputTextarea value="#{episodioController.episodio.plan}"/>
+                                </p:panelGrid>
+                            </p:tab>
+
+
+                            <p:tab title="Diagnostico">
+                                <p:panelGrid columns="2" layout="grid">
+                                    <p:outputLabel value="Seleccionar Diagnosticos "/>
+                                    <p:commandButton value="Agregar" oncomplete="PF('dlgDiagnosticos').show();"/>
+                                    <p:outputLabel value="Cantidad de diagnosticos"/>
+                                    <p:outputLabel  value="#{episodioController.diagnosticosSeleccionado.size()}"/>
+                            </p:panelGrid>
+                            <br/>
+                            <p:dataTable id="tblDiag" value="#{episodioController.diagnosticosSeleccionado}" var="diagnostico"
+                                         widgetVar="tblDiag">
+                                <p:column headerText="Diagnosticos Seleccionados" style="width: 50%; text-align:  center" >
+                                    <p:outputLabel value="#{diagnostico.descripcion}"/>
+                                </p:column>
+                                <p:column headerText="Eliminar diagnostico" style="width: 10%" >
+                                    <p:commandButton icon="ui-icon-close"/>
+                                </p:column>
+                            </p:dataTable>
+                        </p:tab>
+                        <p:tab title="Incapacidad">
+                            <p:panelGrid columns="2" layout="grid">
+
+                            </p:panelGrid>
+                        </p:tab>
+
+                        <p:tab title="Recetas">
+                            <p:panelGrid columns="2" layout="grid">
+
+                            </p:panelGrid>
+                        </p:tab>
+
+                        <p:tab title="Examenes">
+                            <p:panelGrid columns="2" layout="grid">
+
+                            </p:panelGrid>
+                        </p:tab>
+                        <p:tab title="Referencia">
+                            <p:panelGrid columns="2" layout="grid">
+
+                            </p:panelGrid>
+                        </p:tab>
+
+                        <p:tab title="Resumen">
+                            <p:panelGrid columns="2" layout="grid">
+
+                            </p:panelGrid>
+                        </p:tab>
+
+                    </p:tabView>
+                </h:form>
+
+            </p:panel>
+            <p:dialog id="dlgDiagnosticos" header="Seleccion de Diagnosticos" showEffect="fade" hideEffect="explode" 
+                      style="width: 100%;margin: 0 auto; text-align:center;align-self: center ;
+                      padding: 5px; text-align: justify;font-size: 14px"
+                      widgetVar="dlgDiagnosticos" modal="true" draggable="false" resizable="false" minWidth="400"  >
+                <h:form>
+
+                    <p:dataTable id="tblDiagnosticos" value="#{diagnosticoController.lstDiagnosticos}" 
+                                 var="diagnostico" style="width: 80%;margin: 0 auto; text-align:center;
+                                 padding: 5px; text-align: justify;font-size: 14px" selection="#{episodioController.diagnosticosSeleccionado}" 
+                                 emptyMessage="No hay registros en la base de datos" rowKey="#{diagnostico.idDiagnostico}"
+                                 paginator="true" rows="15" paginatorPosition="bottom"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
+                                 {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="5,10,15,25,50"  widgetVar="data" >
+
+
+                        <f:facet name="header" >
+                            <p:outputPanel style="height: available">
+                                <h:outputText value="Buscar en todos los campos" style="padding-right: 20px"/>
+                                <p:inputText  id="globalFilter" onkeyup= "PF('data').filter()" 
+                                              placeholder="Ingrese cualquier palabra o numero"  style="width: 350px"/> 
+                                <p:commandButton value="Agregar diagnosticos" update="panel" oncomplete="PF('dlgDiagnosticos').hide();"/>
+
+                            </p:outputPanel>
+                            <p:separator/>
+                            <BR/>
+
+                        </f:facet>
+
+                        <p:column selectionMode="multiple" style="width: 1%"/>
+
+                        <p:column headerText="Diagnostico" style="width: 50%; text-align:  center" >
+                            <p:outputLabel value="#{diagnostico.descripcion}"/>
+                        </p:column>
+
+
+                    </p:dataTable>
+
+                </h:form>
+            </p:dialog>
+
+        </ui:define>
+
+        <ui:define name="bottom">
+
+        </ui:define>
+
+    </ui:composition>
+
+</body>
+</html>
