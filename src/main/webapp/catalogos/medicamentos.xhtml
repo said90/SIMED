@@ -43,11 +43,11 @@
 
                             </f:facet>
 
-                            <p:column headerText="Nombre Generico de medicamento" style="width: 50%; text-align:  center">
+                            <p:column headerText="Nombre Generico de medicamento" filterBy="#{medicamento.nombreGenerico}" filterMatchMode="contains" style="width: 50%; text-align:  center">
                                 <p:outputLabel value="#{medicamento.nombreGenerico}"/>
                             </p:column>
 
-                            <p:column headerText="Nombre comercial de medicamento" style="width: 50%; text-align:  center">
+                            <p:column headerText="Nombre comercial de medicamento" filterBy="#{medicamento.nombreComercial}" filterMatchMode="contains" style="width: 50%; text-align:  center">
                                 <p:outputLabel value="#{medicamento.nombreComercial}"/>
                             </p:column>
 

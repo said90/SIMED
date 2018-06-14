@@ -48,11 +48,11 @@
                                 <p:outputLabel value="#{medico.idPersona.dui} "/>
                             </p:column>
 
-                            <p:column headerText="J.V.P.M" style="width: 50%; text-align:  center">
+                            <p:column headerText="J.V.P.M" filterBy="#{medico.jvpm}" filterMatchMode="contains" style="width: 50%; text-align:  center">
                                 <p:outputLabel value="#{medico.jvpm} "/>
                             </p:column>
 
-                            <p:column headerText="Nombre del Medico" style="width: 50%; text-align:  center">
+                            <p:column headerText="Nombre del Medico" filterBy="#{medico.idPersona.nombres} #{paciente.idPersona.apellidos} " filterMatchMode="contains" style="width: 50%; text-align:  center">
                                 <p:outputLabel value="#{medico.idPersona.nombres} #{paciente.idPersona.apellidos}"/>
                             </p:column>
 

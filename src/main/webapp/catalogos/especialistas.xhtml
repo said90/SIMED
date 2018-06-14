@@ -44,7 +44,7 @@
 
                             </f:facet>
 
-                            <p:column headerText="Especialista" style="width: 50%; text-align:  center">
+                            <p:column headerText="Especialista" filterBy="#{especialista.descripcion}" filterMatchMode="contains" style="width: 50%; text-align:  center">
                                 <p:outputLabel value="#{especialista.descripcion}"/>
                             </p:column>
                             <p:column headerText="Operaciones" style=" width: 25%;text-align: center; padding-right: 10px">

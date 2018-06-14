@@ -44,11 +44,11 @@
 
                             </f:facet>
 
-                            <p:column headerText="DUI" style="width: 50%; text-align:  center">
+                            <p:column headerText="DUI" filterBy="#{paciente.idPersona.dui}" filterMatchMode="contains" style="width: 50%; text-align:  center">
                                 <p:outputLabel value="#{paciente.idPersona.dui} "/>
                             </p:column>
 
-                            <p:column headerText="Nombre del paciente" style="width: 50%; text-align:  center">
+                            <p:column headerText="Nombre del paciente" filterBy="#{paciente.idPersona.nombres} #{paciente.idPersona.apellidos}" filterMatchMode="contains" style="width: 50%; text-align:  center">
                                 <p:outputLabel value="#{paciente.idPersona.nombres} #{paciente.idPersona.apellidos}"/>
                             </p:column>
 

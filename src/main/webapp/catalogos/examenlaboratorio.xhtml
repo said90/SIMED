@@ -43,7 +43,7 @@
 
                             </f:facet>
 
-                            <p:column headerText="Examen de laboratorio clinico" style="width: 50%; text-align:  center">
+                            <p:column headerText="Examen de laboratorio clinico" filterBy="#{examenLab.descripcion}" filterMatchMode="contains" style="width: 50%; text-align:  center">
                                 <p:outputLabel value="#{examenLab.descripcion}"/>
                             </p:column>
                             <p:column headerText="Operaciones" style=" width: 25%;text-align: center; padding-right: 10px">
