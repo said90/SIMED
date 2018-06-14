@@ -5,9 +5,11 @@
  */
 package com.appconsultas.EJB;
 
+import com.appconsultas.model.Agenda;
 import com.appconsultas.model.Episodio;
 import java.util.List;
 import javax.ejb.Local;
+import org.primefaces.event.SelectEvent;
 
 /**
  *
@@ -30,4 +32,5 @@ public interface EpisodioFacadeLocal {
 
     int count();
     
+    Agenda obtenerCita(SelectEvent selectEvent);
 }
